@@ -1,0 +1,90 @@
+// Version: 1.0.0
+type AnalysisType__478136014 = AnalysisType__556854819;
+type AnalysisType__556854819 = {#manual; #product};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ProductCheck__1036773652 =
+  {
+    adjustedRating : Float;
+    createdAt : Timestamp__67021236;
+    fakePercentage : Float;
+    id : Nat;
+    originalRating : Float;
+    productUrl : Text;
+    reviewCount : Nat;
+    trustBadge : TrustBadge__389089934;
+    userId : UserId__981418688
+  };
+type ProductCheck__615912713 = ProductCheck__1036773652;
+type ReviewAnalysis__534601712 =
+  {
+    analysisType : AnalysisType__478136014;
+    confidence : Float;
+    createdAt : Timestamp__67021236;
+    explanation : Text;
+    fakeScore : Float;
+    id : Nat;
+    patterns : [Text];
+    reviewText : Text;
+    trustScore : Float;
+    userId : UserId__981418688
+  };
+type ReviewAnalysis__915421697 = ReviewAnalysis__534601712;
+type Session__69180279 = Session__71599859;
+type Session__71599859 =
+  {
+    createdAt : Timestamp__608627923;
+    role : UserRole__549269184;
+    token : Text;
+    userId : UserId__911210446
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__608627923 = Timestamp__301639476;
+type Timestamp__67021236 = Timestamp__301639476;
+type TrustBadge__389089934 = TrustBadge__475948654;
+type TrustBadge__475948654 = {#caution; #risky; #trusted};
+type UserId__158757552 = Nat;
+type UserId__911210446 = UserId__158757552;
+type UserId__981418688 = UserId__158757552;
+type UserRole__451090586 = {#admin; #customer; #seller};
+type UserRole__549269184 = UserRole__451090586;
+type User__150061459 = User__455962502;
+type User__455962502 =
+  {
+    analysisCount : Nat;
+    createdAt : Timestamp__608627923;
+    email : Text;
+    id : UserId__911210446;
+    passwordHash : Text;
+    role : UserRole__549269184
+  };
+actor {
+  stable analyses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ReviewAnalysis__915421697]];
+      var elementIndex : Nat__490723111
+    };
+  stable var nextAnalysisId : Nat;
+  stable var nextProductCheckId : Nat;
+  stable var nextTrustBadgeProductId : Nat;
+  stable var nextUserId : Nat;
+  stable productChecks :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ProductCheck__615912713]];
+      var elementIndex : Nat__490723111
+    };
+  stable sessions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Session__69180279]];
+      var elementIndex : Nat__490723111
+    };
+  stable users :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?User__150061459]];
+      var elementIndex : Nat__490723111
+    }
+};

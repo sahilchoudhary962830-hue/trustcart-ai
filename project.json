@@ -1,0 +1,24 @@
+{
+  "overview": "TrustCart AI is a professional SaaS platform that uses AI-powered heuristics to detect fake product reviews on e-commerce platforms. Users can analyze reviews, check product trustworthiness, view analytics dashboards, and admins can monitor platform-wide trends.",
+  "features": [
+    "Review Analyzer with Fake Score, Trust Score, and pattern breakdown",
+    "Product Trust Checker with trust badge generation",
+    "User dashboard with fake vs. real charts and trend analysis",
+    "Admin panel for user management and platform analytics",
+    "Trust Badge System for embeddable AI-verified badges",
+    "Dark/light mode with smooth animations and SaaS design",
+    "User authentication and review history tracking"
+  ],
+  "category": "productivity-saas",
+  "tags": [
+    "ai",
+    "fake-review",
+    "e-commerce",
+    "nlp",
+    "trust",
+    "analytics",
+    "saas",
+    "dashboard"
+  ],
+  "last_updated": "2026-04-08T15:22:05.387Z"
+}

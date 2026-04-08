@@ -1,0 +1,192 @@
+type WeeklyTrendEntry = 
+ record {
+   avgFake: float64;
+   count: nat;
+   week: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   customer;
+   seller;
+ };
+type UserId = nat;
+type TrustBadgeResult = 
+ record {
+   badgeCode: text;
+   score: float64;
+   trustStatus: TrustBadge;
+ };
+type TrustBadge = 
+ variant {
+   caution;
+   risky;
+   trusted;
+ };
+type Timestamp = int;
+type SuspiciousProduct = 
+ record {
+   avgFake: float64;
+   count: nat;
+   url: text;
+ };
+type SignupResult = 
+ record {
+   token: text;
+   userId: UserId;
+ };
+type SessionInfo = 
+ record {
+   role: UserRole;
+   userId: UserId;
+ };
+type ReviewAnalysis = 
+ record {
+   analysisType: AnalysisType;
+   confidence: float64;
+   createdAt: Timestamp;
+   explanation: text;
+   fakeScore: float64;
+   id: nat;
+   patterns: vec text;
+   reviewText: text;
+   trustScore: float64;
+   userId: UserId;
+ };
+type Result__1_9 = 
+ variant {
+   err: text;
+   ok: ProductCheck;
+ };
+type Result__1_8 = 
+ variant {
+   err: text;
+   ok: bool;
+ };
+type Result__1_7 = 
+ variant {
+   err: text;
+   ok: TrustBadgeResult;
+ };
+type Result__1_6 = 
+ variant {
+   err: text;
+   ok: PlatformStats;
+ };
+type Result__1_5 = 
+ variant {
+   err: text;
+   ok: vec AdminUserEntry;
+ };
+type Result__1_4 = 
+ variant {
+   err: text;
+   ok: ReviewAnalysis;
+ };
+type Result__1_3 = 
+ variant {
+   err: text;
+   ok: DashboardStats;
+ };
+type Result__1_2 = 
+ variant {
+   err: text;
+   ok: vec SuspiciousProduct;
+ };
+type Result__1_1 = 
+ variant {
+   err: text;
+   ok: vec ReviewAnalysis;
+ };
+type Result__1 = 
+ variant {
+   err: text;
+   ok: vec ProductCheck;
+ };
+type Result_2 = 
+ variant {
+   err: text;
+   ok: LoginResult;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: SignupResult;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: SessionInfo;
+ };
+type ProductCheck = 
+ record {
+   adjustedRating: float64;
+   createdAt: Timestamp;
+   fakePercentage: float64;
+   id: nat;
+   originalRating: float64;
+   productUrl: text;
+   reviewCount: nat;
+   trustBadge: TrustBadge;
+   userId: UserId;
+ };
+type PlatformStats = 
+ record {
+   averageFakeScore: float64;
+   totalAnalyses: nat;
+   totalUsers: nat;
+   weeklyTrend: vec WeeklyTrendEntry;
+ };
+type LoginResult = 
+ record {
+   role: UserRole;
+   token: text;
+   userId: UserId;
+ };
+type DashboardStats = 
+ record {
+   averageFakeScore: float64;
+   fakeCount: nat;
+   realCount: nat;
+   totalAnalyses: nat;
+   weeklyTrend: vec WeeklyTrendEntry;
+ };
+type AnalysisType = 
+ variant {
+   manual;
+   product;
+ };
+type AdminUserEntry = 
+ record {
+   analysisCount: nat;
+   user:
+    record {
+      analysisCount: nat;
+      createdAt: Timestamp;
+      email: text;
+      id: UserId;
+      passwordHash: text;
+      role: variant {
+              admin;
+              customer;
+              seller;
+            };
+    };
+ };
+service : {
+  analyzeReview: (token: text, reviewText: text) -> (Result__1_4);
+  checkProductUrl: (token: text, productUrl: text) -> (Result__1_9);
+  deleteAnalysis: (token: text, analysisId: nat) -> (Result__1_8);
+  deleteUser: (token: text, targetUserId: nat) -> (Result__1_8);
+  generateTrustBadge: (token: text, productUrl: text) -> (Result__1_7);
+  getAdminStats: (token: text) -> (Result__1_6);
+  getAdminUsers: (token: text, limit: nat, offset: nat) -> (Result__1_5);
+  getAnalysisById: (token: text, analysisId: nat) -> (Result__1_4);
+  getDashboardStats: (token: text) -> (Result__1_3);
+  getTrendingSuspiciousProducts: (token: text) -> (Result__1_2);
+  getUserAnalyses: (token: text, limit: nat, offset: nat) -> (Result__1_1);
+  getUserProductChecks: (token: text, limit: nat, offset: nat) -> (Result__1);
+  login: (email: text, password: text) -> (Result_2);
+  signup: (email: text, password: text, role: UserRole) -> (Result_1);
+  validateSession: (token: text) -> (Result);
+}
